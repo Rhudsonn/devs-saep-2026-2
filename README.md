@@ -74,4 +74,4 @@ critério de aprovação **nota ≥ 7** no painel de feedback do professor.
 
 ---
 
-Aguardando aprovação para iniciar a produção do material da **Aula 1**.
+Direitos Reservados  Karize Viecelli — @karizeviecelli
