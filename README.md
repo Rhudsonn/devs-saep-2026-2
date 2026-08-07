@@ -2,6 +2,8 @@
 
 ## Curso: Projeto Integrador — Sistema de Gestão de Estoque para Almoxarifado
 
+**link para página** https://karizeviecelli.github.io/devs-saep-2026-2/
+
 **Técnico em Desenvolvimento de Sistemas | SENAI | Preparatório SAEP**
 
 Professor(a): Karize Viecelli — [@karizeviecelli]
