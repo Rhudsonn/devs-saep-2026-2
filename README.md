@@ -6,7 +6,11 @@
 
 Professor(a): Karize Viecelli — [@karizeviecelli]
 
-Carga horária total: **55 horas**, distribuídas em **14 aulas** (13 aulas de 4h + 1 aula de encerramento de 3h).
+Carga horária total: **55 horas**, 
+
+distribuídas em **14 aulas** 
+
+(13 aulas de 4h + 1 aula de encerramento de 3h).
 
 ---
 
