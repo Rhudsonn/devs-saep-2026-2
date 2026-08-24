@@ -1,0 +1,7 @@
+
+BCrypt - Spring Security
+
+Usei a dependencia (Spring Security).
+
+- Vou utilizar só o spring security = crypto, sem adotar o spring security inteiro... Porque neste primeiro momento quero resolver só o hash da senha, para não salvar em texto puro no banco de dados.
+ - Neste momento não quero afetar meu fluxo de login manual com HTTP Sessiaon... Mas vou estuda melhor sobre o Spring Security, assim vai me ajudar a entender melhor suas funcionalidade, pelo oque vi de resumo vai me ajudar bastante em questão de segurança e tempo de codificação.

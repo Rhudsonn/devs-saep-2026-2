@@ -1,0 +1,18 @@
+
+ Validar Sessao [x].
+
+ Template - tela login.html [x].
+
+ Criptografar Senha [x].
+
+ Template - tela de inicio, (administrador, gerente, funcionario) [x].
+
+ Atualizar diagrama MER [ ]:
+- Posso fazer isso apartir do banco que o projeto criou altomatico, e anotar o passo a passo.
+
+ Conferir [ ]:
+ - Se o projeto ta seguindo a documentação [ ].
+ - Segue oque a entrega parcial pede [ ].
+
+ Monta Documentação [ ]:
+ - Documentação teorica das minhas duvidas e aprendizados.

@@ -1,0 +1,8 @@
+	---UsuarioEntity---
+Validações:
+
+nome  = (não aceta nullo - 100 caracteres).
+email = (não aceta nullo - unico).
+senha = (não aceta nullo)
+Enum NivelAcesso (STRING).
+Enum Status (STRING). 
