@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+
+
+    <div class="container m-0">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span style="margin-right: 20px"></span>
+
+
+        <div class="collapse navbar-collapse " id="menuPrincipal">
+            <ul class="navbar-nav ms-auto">
+                <a class="navbar-brand" th:href="@{/home}">Makita</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Painel de Controle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/home}">Inicio</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/movimentacao}">Movimentação</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary"  th:href="@{/produto}">Produto</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary"  th:href="@{/}">Usuarios</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/}">Histórico</a>
+            </li>
+            <hr>
+            <p class="card-text">Menu</p>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/}">Usuario</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" th:href="@{/logout}">sair</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+
+            <!-- Header -->
+            <div class="mb-4">
+                <h4 class="mb-0 fw-bold">Produto</h4>
+            </div>
+
+            <!-- Abas principais -->
+            <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="catalogo-tab" data-bs-toggle="tab" data-bs-target="#catalogo" type="button" role="tab">
+                        Catálogo
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="adicionar-tab" data-bs-toggle="tab" data-bs-target="#adicionar" type="button" role="tab">
+                        Adicionar
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="exclusao-tab" data-bs-toggle="tab" data-bs-target="#exclusao" type="button" role="tab">
+                        Exclusão
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content border border-top-0 rounded-bottom p-3" id="mainTabsContent">
+
+                <!-- ===================== CATÁLOGO ===================== -->
+                <div class="tab-pane fade show active" id="catalogo" role="tabpanel">
+
+                    <!--/* Bloco desativado ate a funcionalidade de produtos ser implementada */-->
+                    <!--/*-->
+                    <ul class="nav nav-pills mb-3" id="catalogoSubTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="ativos-tab" data-bs-toggle="pill" data-bs-target="#ativos" type="button" role="tab">
+                                Ativos <span class="badge bg-success ms-1" th:text="${#lists.size(produtosAtivos)}">0</span>
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="inativos-tab" data-bs-toggle="pill" data-bs-target="#inativos" type="button" role="tab">
+                                Inativos <span class="badge bg-secondary ms-1" th:text="${#lists.size(produtosInativos)}">0</span>
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+
+                        <!-- Ativos -->
+                        <div class="tab-pane fade show active" id="ativos" role="tabpanel">
+                            <div class="card rounded-3 overflow-hidden border-0 shadow-sm">
+                                <div class="table-responsive" th:if="${not #lists.isEmpty(produtosAtivos)}">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th class="text-uppercase text-muted small">Nome do Produto</th>
+                                            <th class="text-uppercase text-muted small">Característica</th>
+                                            <th class="text-uppercase text-muted small">Categoria</th>
+                                            <th class="text-uppercase text-muted small">Tamanho</th>
+                                            <th class="text-uppercase text-muted small">Peso</th>
+                                            <th class="text-uppercase text-muted small">Qtd. Mínima</th>
+                                            <th class="text-uppercase text-muted small">Status</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="produto : ${produtosAtivos}">
+                                            <td class="fw-semibold" th:text="${produto.nome}">Nome do Produto</td>
+                                            <td th:text="${produto.caracteristica}">Característica</td>
+                                            <td th:text="${produto.categoria}">Categoria</td>
+                                            <td th:text="${produto.tamanho}">Tamanho</td>
+                                            <td th:text="${produto.peso}">Peso</td>
+                                            <td th:text="${produto.quantidadeMinima}">Qtd. Mínima</td>
+                                            <td><span class="text-success fw-bold">Ativo</span></td>
+                                            <td class="text-end">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-link text-secondary" type="button" data-bs-toggle="dropdown">
+                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                        <li><a class="dropdown-item" th:href="@{/produto/{id}(id=${produto.id})}">Visualizar</a></li>
+                                                        <li><a class="dropdown-item" th:href="@{/produto/{id}/editar(id=${produto.id})}">Editar</a></li>
+                                                        <li><a class="dropdown-item text-danger" th:href="@{/produto/{id}/inativar(id=${produto.id})}">Inativar</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="text-muted small mb-0 p-3" th:if="${#lists.isEmpty(produtosAtivos)}">Nenhum produto ativo.</p>
+                            </div>
+                        </div>
+
+                        <!-- Inativos -->
+                        <div class="tab-pane fade" id="inativos" role="tabpanel">
+                            <div class="card rounded-3 overflow-hidden border-0 shadow-sm">
+                                <div class="table-responsive" th:if="${not #lists.isEmpty(produtosInativos)}">
+                                    <table class="table table-hover align-middle mb-0">
+                                        <thead class="table-light">
+                                        <tr>
+                                            <th class="text-uppercase text-muted small">Nome do Produto</th>
+                                            <th class="text-uppercase text-muted small">Característica</th>
+                                            <th class="text-uppercase text-muted small">Categoria</th>
+                                            <th class="text-uppercase text-muted small">Tamanho</th>
+                                            <th class="text-uppercase text-muted small">Peso</th>
+                                            <th class="text-uppercase text-muted small">Qtd. Mínima</th>
+                                            <th class="text-uppercase text-muted small">Status</th>
+                                            <th></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="produto : ${produtosInativos}">
+                                            <td class="fw-semibold" th:text="${produto.nome}">Nome do Produto</td>
+                                            <td th:text="${produto.caracteristica}">Característica</td>
+                                            <td th:text="${produto.categoria}">Categoria</td>
+                                            <td th:text="${produto.tamanho}">Tamanho</td>
+                                            <td th:text="${produto.peso}">Peso</td>
+                                            <td th:text="${produto.quantidadeMinima}">Qtd. Mínima</td>
+                                            <td><span class="text-warning fw-bold">Inativo</span></td>
+                                            <td class="text-end">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-link text-secondary" type="button" data-bs-toggle="dropdown">
+                                                        <i class="fa-solid fa-ellipsis-vertical"></i>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-end">
+                                                        <li><a class="dropdown-item" th:href="@{/produto/{id}(id=${produto.id})}">Visualizar</a></li>
+                                                        <li><a class="dropdown-item" th:href="@{/produto/{id}/reativar(id=${produto.id})}">Reativar</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p class="text-muted small mb-0 p-3" th:if="${#lists.isEmpty(produtosInativos)}">Nenhum produto inativo.</p>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--*/-->
+
+                    <p class="text-muted small">Catálogo em desenvolvimento.</p>
+
+                </div>
+
+                <!-- ===================== ADICIONAR ===================== -->
+                <div class="tab-pane fade" id="adicionar" role="tabpanel">
+
+                    <ul class="nav nav-pills mb-3" id="adicionarSubTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="add-produto-tab" data-bs-toggle="pill" data-bs-target="#add-produto" type="button" role="tab">
+                                Produto
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="add-categoria-tab" data-bs-toggle="pill" data-bs-target="#add-categoria" type="button" role="tab">
+                                Categoria
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!-- Adicionar Produto -->
+                        <div class="tab-pane fade show active" id="add-produto" role="tabpanel">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Nome do produto</label>
+                                    <input type="text" class="form-control" placeholder="Digite o nome do produto">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Caracteristica</label>
+                                    <input type="text" class="form-control" placeholder="Digite a caracteristica do produto">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Categoria</label>
+                                    <select class="form-select">
+                                        <option selected disabled>Selecione uma categoria</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Tamanho</label>
+                                    <input type="text" class="form-control" placeholder="Digite o tamanho do  produto">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Peso</label>
+                                    <input type="text" class="form-control" placeholder="Digite o peso do produto">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Quantidade minima</label>
+                                    <input type="text" class="form-control" placeholder="Digite a quantidade minima  do produto">
+                                </div>
+                                <button type="submit" class="btn btn-dark">Adicionar produto</button>
+                            </form>
+                        </div>
+
+                        <!-- Adicionar Categoria -->
+                        <div class="tab-pane fade" id="add-categoria" role="tabpanel">
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label">Nome da categoria</label>
+                                    <input type="text" class="form-control" placeholder="Digite o nome da categoria">
+                                </div>
+                                <button type="submit" class="btn btn-dark">Adicionar categoria</button>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ===================== EXCLUSÃO ===================== -->
+                <div class="tab-pane fade" id="exclusao" role="tabpanel">
+
+                    <ul class="nav nav-pills mb-3" id="exclusaoSubTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="del-produto-tab" data-bs-toggle="pill" data-bs-target="#del-produto" type="button" role="tab">
+                                Produto
+                            </button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="del-categoria-tab" data-bs-toggle="pill" data-bs-target="#del-categoria" type="button" role="tab">
+                                Categoria
+                            </button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <!-- Excluir Produto -->
+                        <div class="tab-pane fade show active" id="del-produto" role="tabpanel">
+                            <p class="text-muted small">Nenhum produto para exclusão.</p>
+                        </div>
+
+                        <!-- Excluir Categoria -->
+                        <div class="tab-pane fade" id="del-categoria" role="tabpanel">
+                            <p class="text-muted small">Nenhuma categoria para exclusão.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+Entrega  da aula 5...
+
+DUVIDAS:
+Como usar o código do produto?
+ - código: é o identificador que faz sentido pro negócio — tipo um SKU, código de barras, ou código interno da empresa (ex: PROD-0001, 7891234567890).
+
+- Estudar melhor o relacionamento usando Linst<>, para ter um domínio melhor desta funcionalidade:
+código = @OneToMany(mappedBy = "categoria")
+         private List<ProdutoEntity> produtos;
+
+- Como posso proteger minhas rotas na URL, porque esta com erro.
+
+
+A tela principal é um hub:
+[x] - Não guarda dados
+ * Ela conecta o usuário às telas que guardam dados.
+
+[x] - Exibe contexto
+ * Nome do usuário logado, vindo da sessão criada no login.
+
+[x] - Oferece saída
+ * Botão de logout sempre visível.
+
+
+Login × Principal × Logout:
+[x] - Entrando
+ * Login válido
+ * Sessão criada
+ * Navega para Principal
+
+[x] - Saindo
+ * Clique em "Sair"
+ * Sessão limpa
+ * Volta ao Login
+
+Os 2 acessos obrigatórios — clique
+[x] - Cadastro de Produto
+ * Acesso à tela que será construída na Aula 7 (placeholder por enquanto).
+
+[x] - Gestão de Estoque
+ * Acesso à tela que será construída na Aula 9 (placeholder por enquanto).
+
+[x] - Nome do usuário
+ * Lido diretamente da sessão criada no login.
+
+[x] - Logout
+ * Limpa a sessão e retorna à tela de login.
+
+
+Quiz — 2 perguntas
+ - 1. O que acontece se alguém abrir a tela principal sem login?
+[ ] Deve ser redirecionado ao login.
+[ ] A tela abre normalmente, sem nome de usuário
+
+ - 2. De onde vem o nome exibido na tela principal?
+[ ] É digitado de novo pelo usuário
+[ ] Da sessão criada durante o login
+
+
+
+

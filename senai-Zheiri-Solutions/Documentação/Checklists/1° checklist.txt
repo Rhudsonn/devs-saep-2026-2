@@ -1,0 +1,45 @@
+
+ Validar Sessao [x].
+
+ Template - tela login.html [x].
+
+ Criptografar Senha [x].
+
+ Template - tela de inicio, (administrador, gerente, funcionario) [x].
+
+ Atualizar diagrama MER [ ]:
+- Posso fazer isso apartir do banco que o projeto criou altomatico, e anotar o passo a passo.
+
+ Conferir [ ]:
+ - Se o projeto ta seguindo a documentação [ ].
+ - Segue oque a entrega parcial pede [ ].
+
+ Monta Documentação [ ]:
+ - Documentação teorica das minhas duvidas e aprendizados.
+
+
+Entrega  da aula 5...
+
+Implementar 
+
+Home - exibir mensagem de bem vindo + (nome do usuário logado) [x].
+LOGOUT - implementa a função de logout [ ].
+Cadastro de produtos - Acessar á tela que será construída na aula7 (placeholder por enquanto) [ ].
+Gestão de Estoque - Acesso à tela que será construída na Aula 9 (placeholder por enquanto) [ ].
+Nome do usuário - Lido diretamente da sessão criada no login [ ].
+Logout - Limpa a sessão e retorna à tela de login [ ].
+
+O que acontece se alguém abrir a tela principal sem login? = (Deve ser redirecionado ao login) [ ].
+De onde vem o nome exibido na tela principal? = (Da sessão criada durante o login) [ ].
+
+
+DUVIDAS:
+Como usar o código do produto?
+ - código: é o identificador que faz sentido pro negócio — tipo um SKU, código de barras, ou código interno da empresa (ex: PROD-0001, 7891234567890).
+
+- Estudar melhor o relacionamento usando Linst<>, para ter um domínio melhor desta funcionalidade:
+código = @OneToMany(mappedBy = "categoria")
+         private List<ProdutoEntity> produtos;
+
+- Como posso proteger minhas rotas na URL, porque esta com erro.
+

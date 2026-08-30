@@ -1,0 +1,33 @@
+
+°1 Criar Documentação:
+ - Qual o poblema ?
+ - Como pode ser solucionado ?
+
+°2 Criar Requisitos:
+ - Requisito Funcional (RF).
+ - Requisito Não Funcional (RNF).
+ - Regra de Negócio (RN).
+
+3° Criar Diagramas:
+ - Diagrama de classes.
+ - Diagrama MER, com script de criação do banco de cados.
+ - Entidade de relacionamentos.
+
+°4 Iniciar Projeto:
+ - Spring Initializr - Dependencias.
+ Spring Security
+
+°5 Camadas:
+ - Entity.
+ - Repository.
+ - Service.
+ - Controller.
+ - Dto.
+ 
+ - Mapper.
+ - Excecoes (personalizadas).
+ - Sessao (SessaoDto - SessaoUtil).
+ - Configuracao (Interceptador - WebConfiguracao).
+
+°6 Configurar Bando de dados:
+ - </> application.properties.

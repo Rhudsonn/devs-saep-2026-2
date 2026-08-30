@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movimentação</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container m-0">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span style="margin-right: 20px"></span>
+
+        <div class="collapse navbar-collapse " id="menuPrincipal">
+            <ul class="navbar-nav ms-auto">
+                <a class="navbar-brand" th:href="@{/home}">Makita</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Painel de Controle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/home}">Inicio</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/movimentacao}">Movimentação</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/produto}">Produto</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/}">Usuarios</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/}">Histórico</a>
+            </li>
+            <hr>
+            <p class="card-text">Menu</p>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/}">Usuario</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" th:href="@{/logout}">sair</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="card shadow-sm">
+        <div class="card-body p-4">
+
+            <!-- Header -->
+            <div class="mb-4">
+                <h4 class="mb-0 fw-bold">Movimentação</h4>
+            </div>
+
+            <!-- Mensagens de retorno (sucesso/erro) -->
+            <div th:if="${sucesso}" class="alert alert-success" th:text="${sucesso}"></div>
+            <div th:if="${erro}" class="alert alert-danger" th:text="${erro}"></div>
+
+            <!-- Abas principais -->
+            <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="entrada-tab" data-bs-toggle="tab" data-bs-target="#entrada" type="button" role="tab" aria-controls="entrada" aria-selected="true">
+                        Entrada
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="saida-tab" data-bs-toggle="tab" data-bs-target="#saida" type="button" role="tab" aria-controls="saida" aria-selected="false">
+                        Saída
+                    </button>
+                </li>
+            </ul>
+
+            <div class="tab-content border border-top-0 p-4 rounded-bottom" id="mainTabsContent">
+
+                <!-- ===================== ENTRADA ===================== -->
+                <div class="tab-pane fade show active" id="entrada" role="tabpanel" aria-labelledby="entrada-tab">
+                    <form th:action="@{/movimentacao/entrada}" method="post">
+
+                        <input type="hidden" name="tipo" value="ENTRADA">
+
+                        <!--
+                            TODO: usuário automático vindo da sessão (implementar depois).
+                            Quando a sessão estiver pronta, descomentar a linha abaixo
+                            e apagar o input "usuarioId" fixo/manual que estiver sendo usado.
+
+                        <input type="hidden" name="usuarioId" th:value="${session.usuario?.id}">
+                        -->
+
+                        <div class="mb-3">
+                            <label class="form-label">Produto</label>
+                            <input type="text"
+                                   class="form-control"
+                                   list="listaProdutosEntrada"
+                                   id="produtoNomeEntrada"
+                                   placeholder="Digite o nome do produto"
+                                   autocomplete="off"
+                                   required>
+                            <datalist id="listaProdutosEntrada">
+                                <option th:each="p : ${produtos}"
+                                        th:value="${p.nome}"
+                                        th:attr="data-id=${p.id}">
+                                </option>
+                            </datalist>
+                            <!-- id do produto localizado automaticamente pelo nome -->
+                            <input type="hidden" name="produtoId" id="produtoIdEntrada" required>
+                        </div>
+
+                        <!--
+                            TODO: campo de usuário vindo da sessão (implementar depois).
+
+                        <div class="mb-3">
+                            <label class="form-label">Usuário</label>
+                            <input type="text" class="form-control" th:value="${session.usuario?.nome}" disabled readonly>
+                        </div>
+                        -->
+
+                        <div class="mb-3">
+                            <label class="form-label">Data da movimentação</label>
+                            <input type="date" class="form-control" name="data" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade</label>
+                            <input type="number" class="form-control" name="quantidade" min="1" placeholder="Digite a quantidade" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Confirma entrada</button>
+                    </form>
+                </div>
+
+                <!-- ===================== SAÍDA ===================== -->
+                <div class="tab-pane fade" id="saida" role="tabpanel" aria-labelledby="saida-tab">
+                    <form th:action="@{/movimentacao/saida}" method="post">
+
+                        <input type="hidden" name="tipo" value="SAIDA">
+
+                        <!--
+                            TODO: usuário automático vindo da sessão (implementar depois).
+                            Quando a sessão estiver pronta, descomentar a linha abaixo
+                            e apagar o input "usuarioId" fixo/manual que estiver sendo usado.
+
+                        <input type="hidden" name="usuarioId" th:value="${session.usuario?.id}">
+                        -->
+
+                        <div class="mb-3">
+                            <label class="form-label">Produto</label>
+                            <input type="text"
+                                   class="form-control"
+                                   list="listaProdutosSaida"
+                                   id="produtoNomeSaida"
+                                   placeholder="Digite o nome do produto"
+                                   autocomplete="off"
+                                   required>
+                            <datalist id="listaProdutosSaida">
+                                <option th:each="p : ${produtos}"
+                                        th:value="${p.nome}"
+                                        th:attr="data-id=${p.id}">
+                                </option>
+                            </datalist>
+                            <!-- id do produto localizado automaticamente pelo nome -->
+                            <input type="hidden" name="produtoId" id="produtoIdSaida" required>
+                        </div>
+
+                        <!--
+                            TODO: campo de usuário vindo da sessão (implementar depois).
+
+                        <div class="mb-3">
+                            <label class="form-label">Usuário</label>
+                            <input type="text" class="form-control" th:value="${session.usuario?.nome}" disabled readonly>
+                        </div>
+                        -->
+
+                        <div class="mb-3">
+                            <label class="form-label">Data da movimentação</label>
+                            <input type="date" class="form-control" name="data" th:value="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Quantidade</label>
+                            <input type="number" class="form-control" name="quantidade" min="1" placeholder="Digite a quantidade" required>
+                        </div>
+
+                        <button type="submit" class="btn btn-danger">Confirma saída</button>
+                    </form>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Localiza automaticamente o id do produto a partir do nome digitado,
+    // usando o atributo data-id da <option> correspondente no <datalist>.
+    function ligarBuscaDeProduto(inputId, datalistId, hiddenId) {
+        const input = document.getElementById(inputId);
+        const hidden = document.getElementById(hiddenId);
+        const datalist = document.getElementById(datalistId);
+
+        input.addEventListener('input', function () {
+            const opcoes = datalist.querySelectorAll('option');
+            let encontrado = '';
+            opcoes.forEach(function (opt) {
+                if (opt.value === input.value) {
+                    encontrado = opt.getAttribute('data-id');
+                }
+            });
+            hidden.value = encontrado;
+        });
+    }
+
+    ligarBuscaDeProduto('produtoNomeEntrada', 'listaProdutosEntrada', 'produtoIdEntrada');
+    ligarBuscaDeProduto('produtoNomeSaida', 'listaProdutosSaida', 'produtoIdSaida');
+</script>
+</body>
+</html>

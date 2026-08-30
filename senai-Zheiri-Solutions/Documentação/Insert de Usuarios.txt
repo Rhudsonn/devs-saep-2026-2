@@ -1,0 +1,27 @@
+-- ADMINISTRADOR (senha: admin123 para todos)
+INSERT INTO usuario (nome, email, senha, nivel_acesso, status)
+VALUES (
+    'Rhudsonn',
+    'rhudsonn@gmail.com',
+    '$2b$12$jVK3m9Zoml7ZrZSdV5TD0er4u0jHg7jaglNVkrdpNBjY.Fd2124ve',
+    'ADMINISTRADOR',
+    'ATIVO'
+);
+-- GERENTE (senha: admin123)
+INSERT INTO usuario (nome, email, senha, nivel_acesso, status)
+VALUES (
+    'Karisse',
+    'karisse@gmail.com',
+    '$2b$12$OGAtKS6qjmOgbXQYYYG49Oiw1GAOxil4JnXd.TzYkTqiaks.wC3qK',
+    'GERENTE',
+    'ATIVO'
+);
+-- FUNCIONARIO (senha: admin123)
+INSERT INTO usuario (nome, email, senha, nivel_acesso, status)
+VALUES (
+    'Lucas',
+    'lucas@gmail.com',
+    '$2b$12$ibe82b76HTMV6/AHH/WaIefv7UgHGMgz2dMSetOXW17go0bjwKK5C',
+    'FUNCIONARIO',
+    'INATIVO'
+);

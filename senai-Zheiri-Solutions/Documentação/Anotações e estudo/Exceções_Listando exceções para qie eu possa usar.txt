@@ -1,0 +1,38 @@
+Exceções
+
+BadRequestException
+   Use quando os dados enviados são inválidos ou estão incorretos.
+   Exemplo: campos obrigatórios não preenchidos ou dados inválidos.
+   Status: 400 — Bad Request
+
+DuplicateRequestException
+  Use quando tenta cadastrar algo que já existe.
+  Exemplo: e-mail, CPF ou telefone já cadastrado.
+  Status: 409 — Conflict
+
+ConflictException
+   Use quando a operação é válida, mas entra em conflito com algo que já existe ou está    acontecendo.
+   Exemplo: tentar agendar um horário que já está ocupado.
+   Status: 409 — Conflict
+
+ResourceNotFoundException
+   Use quando o recurso que você procura não existe.
+   Exemplo: buscar um usuário pelo ID e ele não existir.
+   Status: 404 — Not Found
+
+BusinessRuleException
+   Use quando a operação viola uma regra do sistema.
+   Exemplo: tentar fazer um agendamento fora do horário de funcionamento.
+   Status: 400 ou 422
+
+GlobalException
+   Use para tratar erros inesperados que não possuem uma exceção específica.
+   Exemplo: erro interno não previsto no sistema.
+   Status: 500 — Internal Server Error
+
+Status	Em termos simples
+   🔴 400	Você enviou algo errado.
+   🔵 404	Não encontrei o que você pediu.
+   🟠 409	Isso já existe ou entrou em conflito.
+   🟣 422	Entendi o pedido, mas ele viola uma regra.
+   ⚫ 500	Aconteceu um erro inesperado no servidor.

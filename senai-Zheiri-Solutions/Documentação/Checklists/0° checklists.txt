@@ -1,0 +1,46 @@
+
+ Validar Sessao [x].
+
+ Criptografar Senha [x].
+
+ Proteger caminho URL [ ].
+
+ ****** Template: **********
+   admin: 
+		Cadastrar item (Produto + Categoria) [ ].
+		Cadastrar Usuario(Gerente + Funcionario) [ ].
+		Menu (Alterar informação + alterarSenha) [ ].
+		Lista (Gerente + Funcionario + Ativos + Inativos) [ ].
+		exclução ( Gerente + Funcionario) [ ].
+
+   gerente: 
+		Cadastrar Usuario( Funcionario ) [ ].
+		Lista (Funcionario + Ativos + Inativos) [ ].
+		exclução ( Funcionario) [ ].
+		
+	
+
+   publico:
+		login [x]
+		Home [x].
+		movimentacao( Entrada + Saida) [ ]
+		históricoMovimentacao(entrada + saida) [ ]
+		Menu (Alterar informação + alterarSenha) [ ].
+
+ 
+
+ Atualizar diagrama MER [ ]:
+- Posso fazer isso apartir do banco que o projeto criou altomatico, e anotar o passo a passo.
+
+ Conferir [ ]:
+ - Se o projeto ta seguindo a documentação [ ].
+ - Segue oque a entrega parcial pede [ ].
+
+ Monta Documentação [ ]:
+ - Documentação teorica das minhas duvidas e aprendizados.
+
+
+ 
+
+
+

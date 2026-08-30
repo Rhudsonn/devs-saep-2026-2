@@ -1,0 +1,19 @@
+Relenbrando:
+ - HttpSession session + RedirectAttributes attributes + Model model.
+Os tres são usados bastante em controllers do Spring MVC, principalmente quando você está usando Thymeleaf.
+
+HttpSession session
+- É usado para guardar informações do usuário durante a sessão dele no sistema.
+Por exemplo, depois que o usuário faz login, você pode guardar o usuário logado
+- Depois, em outra requisição, você consegue recuperar.
+Resumo = HttpSession = memória temporária do usuário enquanto ele está navegando no sistema.
+- session → guarda quem está logado.
+
+RedirectAttributes attributes
+É usado principalmente para enviar uma mensagem ou informação para a próxima página depois de um redirect.
+Resumo = RedirectAttributes = Passar informações para a próxima requisição após redirect.
+ - attributes → manda "Login realizado com sucesso!" para a página seguinte.
+
+Model model
+ - O Model serve para enviar informações do Controller para o HTML.
+Model model = Controller → HTML = Model é a ponte entre o Controller e a página HTML.

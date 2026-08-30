@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <!-- Bootstrap CSS via CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+
+
+    <div class="container m-0">
+        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <span style="margin-right: 20px"></span>
+
+
+        <div class="collapse navbar-collapse " id="menuPrincipal">
+            <ul class="navbar-nav ms-auto">
+                <a class="navbar-brand" th:href="@{/home}">Makita</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuPrincipal" aria-controls="menuPrincipal" aria-expanded="false" aria-label="Abrir menu">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMenu" aria-labelledby="sidebarMenuLabel">
+
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarMenuLabel">Painel de Controle</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+
+    <div class="offcanvas-body">
+        <ul class="nav flex-column">
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/home}">Inicio</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/movimentacao}">Movimentação</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary"  th:href="@{/produto}">Produto</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary"  th:href="@{/}">Usuarios</a>
+            </li>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/}">Histórico</a>
+            </li>
+            <hr>
+            <p class="card-text">Menu</p>
+            <li class="nav-item mb-3">
+                <a class="nav-link text-secondary" th:href="@{/}">Usuario</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-secondary" th:href="@{/logout}">sair</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="card shadow-sm p-4" style="max-width: 400px; width: 100%;">
+        <div class="card-body text-center">
+            <h3 class="card-title mb-3">Seja bem-vindo!</h3>
+            <p class="mb-1"><span th:text="${usuario.nome}"></span></p>
+            <p class="mb-1"><span th:text="${usuario.nivelAcesso}"></span></p>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

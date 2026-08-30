@@ -1,0 +1,29 @@
+
+No projeto Makita uso (HTTP Sessiaon + cookies)
+- não faço o uso de JWT, é autenticação baseada em sessão, tipico de aplicação ( Thymeleaf com Spring MVC ) tradicional.
+- @Controller retorna ( redicrect/... ), não @RestController retornando JSON.
+
+	Passo a Paaso para testar no POSTMAN:
+1° Suba a aplicação
+Rode `mvn spring-boot:run` (ou play na sua IDE). Confirme no console que subiu sem erro em `http://localhost:8080` e que não deu erro de conexão com o MySQL.
+
+2° Crie uma Collection no Postman
+New Collection → dê um nome tipo 'Makita API'. Isso organiza as requests e permite usar variáveis compartilhadas entre elas (vamos precisar disso pro token).
+
+3° Configure uma variável de ambiente
+Crie um Environment (ex: 'Local') com uma variável `base_url = http://localhost:8080` e outra `token` (vazia por enquanto). Assim você usa `{{base_url}}` nas requests e não precisa reescrever a URL toda hora.
+
+4° Teste o endpoint de login
+Método POST em `{{base_url}}/auth/login` (ajuste o path pro seu). Na aba Body, escolha 'raw' + 'JSON' e envie algo como `{"username": "...", "password": "..."}` (ou email, dependendo do seu DTO). A resposta esperada é 200 com um JSON contendo o token.
+ 	
+5° Salve o token automaticamente
+Na aba 'Scripts' (ou 'Tests', em versões antigas) da request de login, adicione: `pm.environment.set("token", pm.response.json().token);` — ajuste `.token` pro nome real do campo no seu JSON de resposta. Isso guarda o token na variável `{{token}}` toda vez que você logar.
+
+6° Use o token em requests protegidas
+Em qualquer endpoint que exija autenticação, vá na aba 'Authorization', escolha tipo 'Bearer Token' e cole `{{token}}` no campo. O Postman vai mandar o header `Authorization: Bearer <token>` automaticamente.
+
+7° Teste o logout
+Método POST (ou DELETE, depende de como você implementou) em `{{base_url}}/auth/logout`, com o Bearer Token configurado igual ao passo anterior. Verifique o status retornado e, se aplicável, tente usar o mesmo token de novo depois pra confirmar que foi invalidado.
+
+8° Confira os erros comuns
+401 = token ausente/inválido/expirado. 403 = token válido mas sem permissão pra rota. 500 = erro no seu código (olhe o console/log do Spring). 404 = path errado — confira o `@RequestMapping` da classe + `@PostMapping` do método.
